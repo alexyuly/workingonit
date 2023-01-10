@@ -17,8 +17,10 @@ const NewCardInput = ({
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    onSubmitNewCard(value);
-    setValue("");
+    if (value.trim()) {
+      onSubmitNewCard(value);
+      setValue("");
+    }
   };
 
   return (

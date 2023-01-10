@@ -15,14 +15,17 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
     props: {
       cards: [
         {
+          createdTimestamp: 2,
           status: "inactive",
           text: "This card has not been completed yet.",
         },
         {
+          createdTimestamp: 1,
           status: "active",
           text: "This card is being worked on now.",
         },
         {
+          createdTimestamp: 0,
           status: "done",
           text: "This card has been completed already.",
         },
@@ -49,6 +52,8 @@ const Home = ({
           onSubmitNewCard={(value) => {
             setCardsLocal([
               {
+                createdTimestamp: Date.now(),
+                isNew: true,
                 status: "inactive",
                 text: value,
               },
@@ -56,10 +61,12 @@ const Home = ({
             ])
           }}
         />
-        {cardsLocal.map((card, index) => {
+        {cardsLocal.map((card) => {
           return (
             <Card
-              key={index}
+              key={card.createdTimestamp}
+              createdTimestamp={card.createdTimestamp}
+              isNew={card.isNew}
               status={card.status}
               text={card.text}
             />
